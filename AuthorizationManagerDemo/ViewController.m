@@ -17,7 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[AuthorizationManager sharedInstance] requestAuthorizationType:SIAuthorizationTypePhotoLibrary] ;
+    [[AuthorizationManager sharedInstance] requestAuthorizationType:SIAuthorizationTypeAddressBook] ;
 }
 
 

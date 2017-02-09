@@ -17,38 +17,34 @@
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 
-@interface AuthorizationAlter: NSObject<UIAlertViewDelegate>
+@interface AuthorizationAlter: UIAlertView<UIAlertViewDelegate>
 
 + (void)showAuthorizationAlertWithTitle:(NSString *)content;
-
-@property (nonatomic,strong) UIAlertView *alterView ;
 
 @end
 
 @implementation AuthorizationAlter
 
 - (instancetype)initWithTitle:(NSString *)content{
-    if (self = [super init]) {
-        _alterView = [[UIAlertView alloc]initWithTitle:content
-                                               message:nil
-                                              delegate:self
-                                     cancelButtonTitle:@"取消"
-                                     otherButtonTitles:@"去设置", nil] ;
-    }
+    self = [super initWithTitle:content
+                        message:nil
+                       delegate:self
+              cancelButtonTitle:@"取消"
+              otherButtonTitles:@"去设置", nil] ;
     return self ;
 }
 
 + (void)showAuthorizationAlertWithTitle:(NSString *)content{
     dispatch_async(dispatch_get_main_queue(), ^{
         AuthorizationAlter *alter = [[AuthorizationAlter alloc]initWithTitle:content] ;
-        [alter.alterView show] ;
+        [alter show] ;
     }) ;
 }
 
 #pragma mark --- UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (alertView.cancelButtonIndex != buttonIndex) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString] options:@{@"url":@""} completionHandler:nil] ;
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString] options:@{} completionHandler:nil] ;
     }
 }
 
