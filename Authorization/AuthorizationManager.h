@@ -19,8 +19,21 @@ typedef NS_ENUM(NSUInteger,SIAuthorizationType) {
 
 @interface AuthorizationManager : NSObject
 
+
+/**
+    单例对象
+
+    @return 对象
+ */
 + (instancetype)sharedInstance ;
 
+
+/**
+    申请授权
+
+    @param type 授权类型
+    @return 是否申请成功
+ */
 - (BOOL)requestAuthorizationType:(SIAuthorizationType)type ;
 
 @end
